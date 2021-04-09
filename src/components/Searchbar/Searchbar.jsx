@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+// import axios from 'axios';
+//  import { search } from '../../Utils/SearchApi';
+import './Searchbar.modules.css';
+
+function Searchbar({ onSubmit }) {
+  const [query, setQuery] = useState('');
+  // const [list, setList] = useState([]);
+
+  const handleSubmit = e => {
+    e.preventDefault();
+    setQuery(e.target.value);
+    onSubmit(query);
+  };
+
+  const handleChange = e => {
+    setQuery(e.target.value);
+  };
+
+  return (
+    <header className="Searchbar">
+      <form className="SearchForm" onSubmit={handleSubmit}>
+        <label>
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
+
+          <input
+            className="SearchForm-input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            onChange={handleChange}
+          />
+        </label>
+      </form>
+    </header>
+  );
+}
+
+export default Searchbar;
