@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 // import { search } from './Utils/SearchApi';
 
@@ -8,28 +8,47 @@ import axios from 'axios';
 import Container from './components/Container/Container';
 import Searchbar from './components/Searchbar';
 import ImageGallery from './components/ImageGallery';
+import Button from './components/Button';
 
 function App() {
   const [hits, setHits] = useState([]);
-  // const [query, setQuery] = useState('');
-  // const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [page, setPage] = useState(1);
   // const [searchImage, setsearchImage] = useState([]);
 
   const apiKey = '20350102-ed832d5aeaea3e1e1304ff4e5';
 
-  const onSubmit = query => {
+  useEffect(() => {
+    if (searchQuery) {
+      fetchHits();
+    }
+  }, [searchQuery]);
+
+  const onChangeQuery = query => {
+    // console.log(query);
+    setSearchQuery(query);
+  };
+
+  const fetchHits = () => {
     axios
       .get(
-        `https://pixabay.com/api/?q=${query}&page=1&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`,
+        `https://pixabay.com/api/?q=${searchQuery}&page=${page}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`,
       )
-      .then(response => setHits(response.data.hits));
+      .then(response => {
+        setHits(response.data.hits);
+        setPage(page + 1);
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: 'smooth',
+        });
+      });
   };
-  console.log(hits);
 
   return (
     <Container>
-      <Searchbar onSubmit={onSubmit} />
+      <Searchbar onSubmit={onChangeQuery} />
       <ImageGallery hits={hits} />
+      <Button onClick={fetchHits} />
     </Container>
   );
 }

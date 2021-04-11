@@ -19,7 +19,7 @@ function Searchbar({ onSubmit }) {
 
   return (
     <header className="Searchbar">
-      <form className="SearchForm" onSubmit={handleSubmit}>
+      <form className="SearchForm" value={query} onSubmit={handleSubmit}>
         <label>
           <button type="submit" className="SearchForm-button">
             <span className="SearchForm-button-label">Search</span>
