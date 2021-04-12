@@ -60,6 +60,7 @@
 
 .SearchForm-input {
   display: inline-block;
+  vertical-align: middle;
   /* width: 100%; */
   font: inherit;
   font-size: 20px;
