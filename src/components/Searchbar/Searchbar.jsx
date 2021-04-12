@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
-//  import { search } from '../../Utils/SearchApi';
 import './Searchbar.modules.css';
 
 function Searchbar({ onSubmit }) {
   const [query, setQuery] = useState('');
-  // const [list, setList] = useState([]);
 
   const handleSubmit = e => {
     e.preventDefault();

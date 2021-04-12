@@ -2,15 +2,9 @@ import React from 'react';
 import ImageGalleryItem from '../ImageGalleryItem';
 import './ImageGallery.modules.css';
 
-const ImageGallery = ({ hits }) => (
+const ImageGallery = ({ hits, imageClick }) => (
   <ul className="ImageGallery">
-    {hits.map(hit => (
-      <ImageGalleryItem
-        key={hit.id}
-        webformatURL={hit.webformatURL}
-        largeImageURL={hit.largeImageURL}
-      />
-    ))}
+    <ImageGalleryItem hits={hits} imageClick={imageClick} />
   </ul>
 );
 
